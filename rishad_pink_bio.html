@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azizul Hakim — Rishad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blush: #FDF0F5;
+    --petal: #FAE0EC;
+    --rose: #F5C6DC;
+    --ink: #2d1a22;
+    --muted: #9e7a8a;
+    --accent: #e8749e;
+    --soft: #fce8f2;
+    --deep: #c94e7e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blush);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='40' r='2' fill='%23f5c6dc' opacity='0.5'/%3E%3Ccircle cx='80' cy='15' r='1.5' fill='%23e8749e' opacity='0.3'/%3E%3Ccircle cx='150' cy='60' r='2.5' fill='%23f5c6dc' opacity='0.4'/%3E%3Ccircle cx='170' cy='130' r='1.5' fill='%23e8749e' opacity='0.3'/%3E%3Ccircle cx='20' cy='150' r='2' fill='%23f5c6dc' opacity='0.4'/%3E%3Ccircle cx='120' cy='180' r='1.5' fill='%23e8749e' opacity='0.25'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 64px 28px 80px;
+  }
+
+  .hero {
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.1s forwards;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 10vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .nickname {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .quote-line {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+    line-height: 1.6;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    margin: 40px 0;
+    opacity: 0.4;
+  }
+
+  .section {
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+  .section:nth-child(7) { animation-delay: 0.6s; }
+  .section:nth-child(8) { animation-delay: 0.7s; }
+  .section:nth-child(9) { animation-delay: 0.75s; }
+  .section:nth-child(10) { animation-delay: 0.8s; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .info-item {
+    background: var(--soft);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--rose);
+    transition: transform 0.2s ease, box-shadow 0.2s;
+  }
+
+  .info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(232,116,158,0.12);
+  }
+
+  .info-item .label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .info-item .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 13px;
+    padding: 7px 14px;
+    background: var(--soft);
+    border-radius: 99px;
+    color: var(--deep);
+    font-weight: 400;
+    border: 1px solid var(--rose);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    background: var(--petal);
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  .about-text strong {
+    font-weight: 500;
+    color: var(--deep);
+  }
+
+  .place-card {
+    background: var(--soft);
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border: 1px solid var(--rose);
+  }
+
+  .place-icon { font-size: 28px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+
+  .place-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .place-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .goal-card {
+    background: linear-gradient(135deg, #e8749e 0%, #c94e7e 100%);
+    border-radius: 16px;
+    padding: 22px 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .goal-card::before {
+    content: '✦';
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    font-size: 40px;
+    opacity: 0.15;
+    color: white;
+  }
+
+  .goal-card .goal-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .goal-card .goal-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: white;
+  }
+
+  .goal-card .goal-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  .free-day-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .free-day-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--soft);
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 14px;
+    color: var(--ink);
+    border: 1px solid var(--rose);
+    transition: transform 0.2s ease;
+  }
+
+  .free-day-item:hover { transform: translateX(4px); }
+  .free-day-item .icon { font-size: 18px; flex-shrink: 0; }
+
+  .good-side {
+    background: var(--petal);
+    border-radius: 16px;
+    padding: 20px;
+    color: var(--deep);
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    border: 1px solid var(--rose);
+  }
+
+  .links { display: flex; flex-direction: column; gap: 10px; }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--soft);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid var(--rose);
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+  }
+
+  .link-btn:hover {
+    border-color: var(--accent);
+    background: var(--petal);
+    transform: translateX(4px);
+  }
+
+  .link-btn .link-left { display: flex; align-items: center; gap: 12px; }
+
+  .link-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--petal);
+    border: 1px solid var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .link-handle { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  .arrow { color: var(--accent); font-size: 16px; transition: transform 0.2s; }
+  .link-btn:hover .arrow { transform: translateX(3px); }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--petal);
+    border-radius: 99px;
+    padding: 6px 14px 6px 10px;
+    font-size: 13px;
+    color: var(--deep);
+    margin-bottom: 20px;
+    border: 1px solid var(--rose);
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.9s forwards;
+    letter-spacing: 0.05em;
+  }
+
+  .footer span { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 360px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      Single &amp; free 🎀
+    </div>
+    <p class="eyebrow">Hey, I'm</p>
+    <h1>Azizul<br><em>Hakim.</em></h1>
+    <p class="nickname">but everyone calls me Rishad &mdash; Jan 8, 2007</p>
+    <p class="quote-line">"Big dih, bigger heart — and somehow still the most patient person in the room."</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <p class="section-label">The basics</p>
+    <div class="info-grid">
+      <div class="info-item">
+        <p class="label">Age</p>
+        <p class="value">19</p>
+      </div>
+      <div class="info-item">
+        <p class="label">MBTI</p>
+        <p class="value">ISFJ ✦</p>
+      </div>
+      <div class="info-item">
+        <p class="label">Currently at</p>
+        <p class="value">Dhaka College, Year 12</p>
+      </div>
+      <div class="info-item">
+        <p class="label">Was at</p>
+        <p class="value">University Laboratory School & College</p>
+      </div>
+      <div class="info-item">
+        <p class="label">City</p>
+        <p class="value">Dhaka, BD</p>
+      </div>
+      <div class="info-item">
+        <p class="label">Birthday</p>
+        <p class="value">8th January</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">About</p>
+    <p class="about-text">
+      19, Dhaka. Still figuring things out — but doing it with intention.<br><br>
+      I'm the kind of person who notices the details most people scroll past. I cook, I game, I pick up a camera when something feels worth remembering. I love things that are <strong>natural</strong> — untouched, honest, real. Somewhere between late-night noodles and quiet walks through DU campus, I'm building toward something bigger.<br><br>
+      People don't always see it at first, but give it time — I have a way of becoming the person you didn't know you needed around.
+    </p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Favourite place</p>
+    <div class="place-card">
+      <div class="place-icon">🌸</div>
+      <div>
+        <p class="place-name">Dhaka University Area</p>
+        <p class="place-desc">There's something about the old trees, the open roads, the quiet that somehow exists inside a city of millions. It just feels like the world slows down there.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Where I'm headed</p>
+    <div class="goal-card">
+      <p class="goal-label">The goal</p>
+      <p class="goal-text">Build a tech startup from scratch — something that actually solves a real problem.</p>
+      <p class="goal-sub">Economics, entrepreneurship, a life that actually means something. I'm not in a hurry — I'm just making sure every step counts.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">A free day looks like</p>
+    <div class="free-day-list">
+      <div class="free-day-item">
+        <span class="icon">🍜</span>
+        <span>Making noodles — my own recipe, my own pace</span>
+      </div>
+      <div class="free-day-item">
+        <span class="icon">📱</span>
+        <span>Scrolling social media, falling into rabbit holes</span>
+      </div>
+      <div class="free-day-item">
+        <span class="icon">📖</span>
+        <span>Reading — lately <em>Things Only You See When You Slow Down</em></span>
+      </div>
+      <div class="free-day-item">
+        <span class="icon">💭</span>
+        <span>Just thinking about everything. For a long time.</span>
+      </div>
+      <div class="free-day-item">
+        <span class="icon">🌸</span>
+        <span>Being somewhere natural — or at least wishing I was</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">What people say</p>
+    <div class="good-side">
+      "The one who always sees the good in you — and somehow knows exactly what to say when it matters."
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Into</p>
+    <div class="tags">
+      <span class="tag">🍜 Cooking noodles</span>
+      <span class="tag">🌸 Nature & natural things</span>
+      <span class="tag">📷 Editing</span>
+      <span class="tag">🎮 Gaming</span>
+      <span class="tag">🚶 Walking</span>
+      <span class="tag">✈️ Travelling</span>
+      <span class="tag">🎥 Fun videography</span>
+      <span class="tag">💻 Fun coding</span>
+      <span class="tag">🗣️ Yapping</span>
+      <span class="tag">☕ Hangouts</span>
+      <span class="tag">⚽ Sports</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <p class="section-label">Find me</p>
+    <div class="links">
+      <a href="https://discord.com/users/mindsopeaceful" class="link-btn" target="_blank">
+        <div class="link-left">
+          <div class="link-icon">🎮</div>
+          <div>
+            <div>Discord</div>
+            <div class="link-handle">mindsopeaceful</div>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="mailto:azsksk123@gmail.com" class="link-btn">
+        <div class="link-left">
+          <div class="link-icon">✉️</div>
+          <div>
+            <div>Email me</div>
+            <div class="link-handle">azsksk123@gmail.com</div>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    made with soft things &nbsp;<span>🎀</span>&nbsp; rishad &copy; 2025
+  </div>
+
+</div>
+</body>
+</html>
